@@ -37,17 +37,8 @@ Un chatbot conversațional care recomanda carti pe baza unei intrebari tematice 
 ##  Rularea proiectului
 
 
-### 1. Creeaza si activeaza un mediu virtual
 
-```bash
-python -m venv .venv
-# Windows:
-.venv\Scripts\activate
-# Linux/macOS:
-source .venv/bin/activate
-```
-
-### 2. Instaleaza dependentele
+### 1. Instaleaza dependentele
 
 ```bash
 pip install -r requirements.txt
@@ -55,7 +46,7 @@ pip install -r requirements.txt
 
 ---
 
-### 3. Populeaza vector store-ul
+### 2. Populeaza vector store-ul
 
 ```bash
 python init_store.py
@@ -63,7 +54,7 @@ python init_store.py
 
 ---
 
-### 4. Ruleaza chatbot-ul
+### 3. Ruleaza chatbot-ul
 
 ```bash
 python chatbot.py
