@@ -70,6 +70,6 @@ python chatbot.py
 
 ---
 
-Proiectul nu foloseste vector store-ul OpenAI – toate embedding-urile sunt stocate si cautate local cu ChromaDB.
+Proiectul nu foloseste vector store-ul OpenAI. Toate embedding-urile sunt stocate si cautate local cu ChromaDB.
 
 
