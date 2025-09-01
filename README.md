@@ -1,7 +1,7 @@
 
 # Smart Librarian – AI cu RAG + Tool Calling
 
-Un chatbot conversațional care recomanda carti pe baza unei intrebari tematice si ofera un rezumat detaliat al titlului ales.
+Un chatbot conversational care recomanda carti pe baza unei intrebari tematice si ofera un rezumat detaliat al titlului ales.
 
 ---
 
