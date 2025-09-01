@@ -1,55 +1,69 @@
+
 # Smart Librarian – AI cu RAG + Tool Calling
 
-Un chatbot AI conversational care recomanda carti pe baza intereselor utilizatorului, folosind OpenAI + RAG (ChromaDB) + tool pentru rezumat. Implementat ca aplicatie CLI.
+Un chatbot conversațional care recomanda carti pe baza unei intrebari tematice si ofera un rezumat detaliat al titlului ales.
 
 ---
 
-## Functionalitati
+## Functionalitate
 
-- Cautare semantica in baza de date de carti (ChromaDB + embeddings OpenAI)
-- Recomandare generata de GPT-3.5 pe baza celor mai relevante carti
-- Tool `get_summary_by_title()` care returneaza un rezumat detaliat
-- Optiune de citire cu voce (Text-to-Speech, TTS)
-- Suport pentru carti in limba romana si engleza
+1. Primeste o intrebare
+
+2. Genereaza embedding pentru intrebare si cauta cele mai relevante 3 carti in `ChromaDB`.
+
+3. Trimite catre GPT un prompt cu aceste 3 titluri si cere alegerea celui mai potrivit + explicatie.
+
+4. Apeleaza un tool (`get_summary_by_title`) care returneaza rezumatul detaliat.
+
+5. (Optional) Citeste recomandarea cu voce (TTS).
 
 ---
 
-## Structura fisierelor
+##  Structura proiectului
 
 ```
-ChatBot/
-├── chatbot.py         # Chatbotul principal (CLI)
+├── chatbot.py         # Interfata CLI principala
 ├── init_store.py      # Populeaza ChromaDB cu embedding-uri
-├── tools.py           # Rezumate + tool de extragere
-├── vector_store.py    # Modul de cautare semantica
-├── chroma_data/       # Folderul creat de ChromaDB (vector store local)
-└── .venv/             # Mediu virtual (exclus din git)
+├── vector_store.py    # Functia de cautare semantica
+├── tools.py           # Dictionar + functie tool calling
+├── config.py          # Incarcarea cheii OpenAI din .env
+├── .gitignore
+├── .env.example       # Model pentru configurare locala
+├── README.md
 ```
 
 ---
 
-## Cum rulezi aplicatia
+##  Rularea proiectului
 
-1. **Cloneaza proiectul** si creeaza mediu virtual (daca nu exista deja):
+
+### 1. Creeaza si activeaza un mediu virtual
 
 ```bash
 python -m venv .venv
-source .venv/Scripts/activate   # Windows
+# Windows:
+.venv\Scripts\activate
+# Linux/macOS:
+source .venv/bin/activate
 ```
 
-2. **Instaleaza dependintele**:
+### 2. Instaleaza dependentele
 
 ```bash
 pip install -r requirements.txt
 ```
 
-3. **Populeaza vector store-ul cu carti**:
+---
+
+### 3. Populeaza vector store-ul
 
 ```bash
 python init_store.py
 ```
 
-4. **Lanseaza chatbot-ul**:
+---
+
+### 4. Ruleaza chatbot-ul
 
 ```bash
 python chatbot.py
@@ -57,28 +71,14 @@ python chatbot.py
 
 ---
 
-## 💡 Exemple de intrebari pentru testare
+## Exemple de intrebari
 
-- `Vreau o carte despre magie`
-- `Ce imi recomanzi daca imi plac povestile fantastice?`
-- `Ce carte are teme despre libertate si control politic?`
-- `Imi doresc o carte despre satul romanesc`
-
----
-
-## Despre vector store
-
-Proiectul foloseste **ChromaDB** ca vector store local, care permite cautare semantica dupa embeddings. Nu s-a folosit `openai.vector_store` sau alte servicii cloud interzise.
+- `Vreau o carte despre libertate si control social.`
+- `Ce-mi recomanzi dacă iubesc povestile fantastice?`
+- `O carte romaneasca despre maturizare?`
 
 ---
 
-## Observatii
+Proiectul nu foloseste vector store-ul OpenAI – toate embedding-urile sunt stocate si cautate local cu ChromaDB.
 
-- Pentru ca sistemul sa functioneze corect, intrebarile si rezumatele trebuie sa fie in aceeasi limba (preferabil romana).
-- Recomandarea GPT se bazeaza pe cele mai apropiate 3 carti, selectate semantic.
 
----
-
-## Final
-
-Proiectul este 100% functional si pregatit pentru livrare sau extindere (ex: Streamlit, Speech-to-Text, filtrare etc).
